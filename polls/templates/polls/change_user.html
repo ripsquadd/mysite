@@ -1,0 +1,15 @@
+{% load bootstrap4 %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+
+{% block title %} Правка личных данных {% endblock %}
+
+{% block content %}
+   <h2>Правка личных данных пользователя {{ user.first_name }} {{ user.last_name }}</h2>
+   <form method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       {% bootstrap_form form layout='horizontal' %}
+       {% buttons submit='Сохранить' %} {% endbuttons %}
+   </form>
+{% endblock %}

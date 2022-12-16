@@ -1,0 +1,20 @@
+<a class="p-2 text-dark" href="{% url 'polls:register' %}">Регистрация</a>
+<a class="p-2 text-dark" href="{% url 'polls:profile' %}">Профиль</a>
+<a class="p-2 text-dark" href="{% url 'polls:logout' %}">Выход</a>
+<a class="p-2 text-dark" href="{% url 'polls:login' %}">Вход</a>
+
+{% if latest_question_list %}
+<ul>
+    {% for question in latest_question_list %}
+    <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a> </li>
+    {% if question.short_detail %}
+    <p>{{question.short_detail}}</p>
+    {% endif %}
+    {% endfor %}
+</ul>
+    {% else %}
+     <p>
+         Нет вопросов!
+     </p>
+
+{% endif %}

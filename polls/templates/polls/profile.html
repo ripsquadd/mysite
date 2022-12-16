@@ -1,0 +1,21 @@
+{% load bootstrap4 %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+
+{% block title %} Профиль пользователя {% endblock %}
+
+{% block content %}
+    <a class="p-2 text-dark" href="{% url 'polls:logout' %}">Выход</a>
+    <a class="p-2 text-dark" href="{% url 'polls:index' %}">На главную</a>
+    <a class="p-2 text-dark" href="{% url 'polls:change' %}">Редактировать данные</a>
+    <a class="p-2 text-dark" href="{% url 'polls:password_change' %}">Изменить пароль</a>
+    <a class="p-2 text-dark" href="{% url 'polls:delete' %}">Удалить аккаунт</a>
+   <h2>Профиль пользователя {{ user.username }}</h2>
+   {% if user.first_name and user.last_name %}
+       <p>{{ user.first_name }} {{ user.last_name }} </p>
+   {% endif %}
+    {% if user.photo %}
+      <img class='img' src="{{ user.photo.url }}" height=200 width=200>
+   {% endif %}
+{% endblock %}
