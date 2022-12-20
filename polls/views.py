@@ -12,7 +12,6 @@ from django.contrib import messages
 
 from .forms import RegisterUserForm
 from .models import Question, Choice, User, Voter
-from django.template import loader
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
@@ -35,20 +34,6 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 
-# def vote(request, question_id): ОРГИНАЛ
-#     question = get_object_or_404(Question, pk=question_id)
-#     try:
-#         selected_choice = question.choice_set.get(pk=request.POST['choice'])
-#     except (KeyError, Choice.DoesNotExist):
-#         return render(request, 'polls/detail.html', {
-#             'question': question,
-#             'error_message': 'вы не сделали выбор'
-#         })
-#     else:
-#         selected_choice.votes += 1
-#         selected_choice.save()
-#         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-
 @login_required
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -70,6 +55,7 @@ def vote(request, question_id):
         v = Voter(user=request.user, question=question)
         v.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
 
 class RegisterView(CreateView):
     template_name = 'polls/register.html'

@@ -32,14 +32,6 @@ class Question(models.Model):
         return self.question_text
 
 
-# class Choice(models.Model): ОРИГИНАЛ
-#     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-#     choice_text = models.CharField(max_length=200)
-#     votes = models.IntegerField(default=0)
-#
-#     def __str__(self):
-#         return self.choice_text
-
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
@@ -52,10 +44,6 @@ class Choice(models.Model):
 class Voter(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-
-
-# https://habr.com/ru/sandbox/164517/
-# https://habr.com/ru/company/leader-id/blog/501570/
 
 
 class User(AbstractUser):
